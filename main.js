@@ -1,15 +1,28 @@
 const main = document.querySelector('#main');
 const calculo = document.querySelector('#calc');
 const nombre = document.querySelector('#nombre');
-const peso = parseInt(document.getElementById('peso'));
-const altura = parseInt(document.getElementById('altura'));
-const sexo = document.getElementById('#sexo')
+const pesoInput = document.getElementById('peso');
+const alturaInput = document.getElementById('altura');
 
-let res = (peso / Math.pow(altura, 2));;
+function guardarResultado (resultado, condicion){
+    const datos = {
+        nombre: nombre.value,
+        resultado: resultado.toFixed(2),
+        condicion: condicion
+    };
+    const datosJSON = JSON.stringify(datos);
+    localStorage.setItem('resultadoIMC', datosJSON);
 
+    let datosPantalla = localStorage.getItem('resultadoIMC');
+    
+}
 
 calculo.addEventListener("click",() => {
-    let resultado = ""
+    const peso = parseInt(pesoInput.value);
+    const altura = parseInt(alturaInput.value) / 100;
+    const sexo = document.getElementById('sexo').value
+    const res = peso / Math.pow(altura, 2);
+    let resultado = "";
     switch (sexo) {
         case "m":
             if (res < 20) {
@@ -43,9 +56,9 @@ calculo.addEventListener("click",() => {
             resultado = "no se ha podido calcular.";
     }
 
-    main.innerHTML += "Tu IMC es de: " + res + ", y tu condición " +resultado;
+    main.innerHTML +=  "Tu IMC es de: " + res + ", y tu condición " +resultado;
+
+    guardarResultado(res, resultado);
+
 });
-
-
-
 
