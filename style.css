@@ -1,7 +1,6 @@
 *{
     padding: 0;
     margin: 0;
-    background-color: BLACK;  
 }
 
 h1{
@@ -9,11 +8,11 @@ h1{
     padding-bottom: 40PX;
     margin-bottom: 30PX;
     text-align: center;
-    color: cornsilk;    
+    color: black;    
 }
 
 p{
-    color: white;
+    color: rgb(63, 63, 63);
     font-size: 22px;
     text-align: center;
 }
@@ -27,7 +26,7 @@ p{
 
 .input input{
     appearance: none;
-    background-color: beige;
+    background-color: darkgrey;
     width:270px;
     padding:10px;
     margin: 10px;
@@ -47,12 +46,11 @@ p{
 
 }
 
-
 #calc{
     margin: 30px;
     height: 30px;
     width: 175px;
-    background-color: wheat;
+    background-color: dimgray;
     border: 1px solid rgba(88, 88, 88, 0.774);
     border-radius: 8px;
     font-size: 18px;
@@ -68,9 +66,50 @@ p{
 
 .mensaje{
     font-size: 25px;
-    color: gray;
+    color: dimgrey;
 }
 
 .datos{
     color: white;
+}
+
+.boton{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.btn{
+    margin: 30px;
+    height: 4%;
+    width: 160px;
+    background-color: dimgray;
+    border: 1px solid rgba(88, 88, 88, 0.774);
+    border-radius: 8px;
+    font-size: 18px;
+
+}
+
+body{
+    transition: 0.2s, color 0.2s;
+}
+
+body.dark-mode{
+    background-color: black;
+}
+
+body.dark-mode h1{
+    color: cornsilk;
+}
+
+body.dark-mode p{
+    color: white;
+}
+
+body.dark-mode #calc{
+    background-color: wheat;
+}
+
+body.dark-mode .btn{
+    background-color: wheat;
 }
