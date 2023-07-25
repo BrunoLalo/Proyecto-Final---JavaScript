@@ -14,7 +14,6 @@ function guardarResultado (resultado, condicion){
     localStorage.setItem('resultadoIMC', datosJSON);
 
     let datosPantalla = localStorage.getItem('resultadoIMC');
-    
 }
 
 calculo.addEventListener("click",() => {
@@ -22,6 +21,7 @@ calculo.addEventListener("click",() => {
     const altura = parseInt(alturaInput.value) / 100;
     const sexo = document.getElementById('sexo').value
     const res = peso / Math.pow(altura, 2);
+
     let resultado = "";
     switch (sexo) {
         case "m":
@@ -56,7 +56,10 @@ calculo.addEventListener("click",() => {
             resultado = "no se ha podido calcular.";
     }
 
-    main.innerHTML +=  "Tu IMC es de: " + res + ", y tu condición " +resultado;
+    const mensaje = document.createElement("p");
+    mensaje.classList.add('mensaje');
+
+    main.innerHTML +=  "<p class='mensaje'>" +"Tu IMC es de: " + res.toFixed(2) +  ", y tu condición " +resultado + "</p>";
 
     guardarResultado(res, resultado);
 

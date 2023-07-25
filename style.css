@@ -1,7 +1,7 @@
 *{
     padding: 0;
     margin: 0;
-    background-color: BLACK; 
+    background-color: BLACK;  
 }
 
 h1{
@@ -14,7 +14,8 @@ h1{
 
 p{
     color: white;
-    font-size: 20px;
+    font-size: 22px;
+    text-align: center;
 }
 
 .input{
@@ -25,24 +26,47 @@ p{
 }
 
 .input input{
-    background-color: floralwhite;
+    appearance: none;
+    background-color: beige;
+    width:270px;
+    padding:10px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+.input input:focus{
+    background-color: darkgray;
+    transform: scale(1.1);
+    border: none;
+}
+
+.input input:active{
+    border: none;
 
 }
+
 
 #calc{
-    width: 75px;
-    background-color: #79d5ff93;
+    margin: 30px;
+    height: 30px;
+    width: 175px;
+    background-color: wheat;
     border: 1px solid rgba(88, 88, 88, 0.774);
     border-radius: 8px;
+    font-size: 18px;
 }
-
-#calc button{
-    display: flex;
-    align-items: center;
-
-}
-
 #calc:hover {
     transform: scale(1.1); 
 }
 
+.calculo{
+    display: flex;
+    justify-content: center;
+}
+
+.mensaje{
+    font-size: 25px;
+    color: gray;
+}
