@@ -8,7 +8,8 @@ h1{
     padding-bottom: 40PX;
     margin-bottom: 30PX;
     text-align: center;
-    color: black;    
+    color: black;   
+    font-weight: lighter; 
 }
 
 p{
@@ -67,6 +68,10 @@ p{
 .mensaje{
     font-size: 25px;
     color: dimgrey;
+    border: 1px solid black;
+    margin-left: 170px;
+    margin-right: 170px;
+    padding: 10px 0;
 }
 
 .datos{
@@ -112,4 +117,7 @@ body.dark-mode #calc{
 
 body.dark-mode .btn{
     background-color: wheat;
+}
+body.dark-mode .mensaje{
+    border: 1px solid white;
 }
