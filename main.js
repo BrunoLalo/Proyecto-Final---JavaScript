@@ -4,7 +4,17 @@ const nombre = document.querySelector('#nombre');
 const pesoInput = document.getElementById('peso');
 const alturaInput = document.getElementById('altura');
 
-function guardarResultado (resultado, condicion){
+function mostrarResultado(nombre, resultado, condicion){
+    let datosPantalla = localStorage.getItem('resultadoIMC');
+    const datosGuardados = document.createElement("ul");
+    datosGuardados.classList.add('datos');
+
+    main.innerHTML += "<li class='datos'>" + nombre.value + " " + resultado + " " + condicion + "</li>";
+}
+
+
+
+function guardarResultado(resultado, condicion) {
     const datos = {
         nombre: nombre.value,
         resultado: resultado.toFixed(2),
@@ -12,11 +22,9 @@ function guardarResultado (resultado, condicion){
     };
     const datosJSON = JSON.stringify(datos);
     localStorage.setItem('resultadoIMC', datosJSON);
-
-    let datosPantalla = localStorage.getItem('resultadoIMC');
 }
 
-calculo.addEventListener("click",() => {
+calculo.addEventListener("click", () => {
     const peso = parseInt(pesoInput.value);
     const altura = parseInt(alturaInput.value) / 100;
     const sexo = document.getElementById('sexo').value
@@ -59,9 +67,10 @@ calculo.addEventListener("click",() => {
     const mensaje = document.createElement("p");
     mensaje.classList.add('mensaje');
 
-    main.innerHTML +=  "<p class='mensaje'>" +"Tu IMC es de: " + res.toFixed(2) +  ", y tu condición " +resultado + "</p>";
+    main.innerHTML += "<p class='mensaje'>" + "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado + "</p>";
 
     guardarResultado(res, resultado);
+    mostrarResultado(nombre, res, resultado)
 
 });
 
