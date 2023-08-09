@@ -1,10 +1,11 @@
 const main = document.querySelector('#main');
 const calculo = document.querySelector('#calc');
-const nombre = document.querySelector('#nombre');
 const pesoInput = document.getElementById('peso');
 const alturaInput = document.getElementById('altura');
+const nombre = document.querySelector('#nombre');
 
 const resultadosIMC = []
+
 function guardarResultado(resultado, condicion) {
     const datos = {
         nombre: nombre.value,
@@ -16,14 +17,13 @@ function guardarResultado(resultado, condicion) {
     localStorage.setItem('resultadoIMC', datosJSON);
 }
 function mostrarResultado() {
-
     let datosPantalla = localStorage.getItem('resultadoIMC');
     resultadosIMC.forEach(resultado => {
         const datosGuardados = document.createElement("ul");
         datosGuardados.classList.add('datos');
 
-        main.innerHTML += "<h5 class='mensaje'>" + "Tu anterior cálculo fue:" + "</h5>";
-        main.innerHTML += "<li class='datos'>" + resultado.nombre + " " + resultado.resultado + " " + resultado.condicion + "</li>";
+        main.innerHTML += "<p class='mensaje'>" + "Tu cálculo fue:" + "</p>";
+        main.innerHTML += "<li class='datos'>" + resultado.nombre + "; IMC: " + resultado.resultado + "; Condición: " + resultado.condicion +"."+ "</li>";
     })
 }
 
@@ -33,6 +33,7 @@ calculo.addEventListener("click", () => {
     const altura = parseInt(alturaInput.value) / 100;
     const sexo = document.getElementById('sexo').value
     const res = peso / Math.pow(altura, 2);
+
 
     let resultado = "";
     switch (sexo) {
@@ -71,9 +72,17 @@ calculo.addEventListener("click", () => {
     const mensaje = document.createElement("p");
     mensaje.classList.add('mensaje');
 
-    main.innerHTML += "<p class='mensaje'>" + "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado + "</p>";
+    Swal.fire({
+        title: '¡Calculado!',
+        text: "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado,
+        icon: 'question',
+        confirmButtonText: 'Aceptar',
+        iconColor: "dimgray",
+        iconHtml: '<i class="bi bi-calculator"></i>'
+    })
 
-    guardarResultado();
+
+    guardarResultado(res, resultado);
     mostrarResultado();
 });
 
