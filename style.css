@@ -69,8 +69,8 @@ p{
     font-size: 25px;
     color: dimgrey;
     border: 1px solid black;
-    margin-left: 170px;
-    margin-right: 170px;
+    margin-left: 200px;
+    margin-right: 200px;
     padding: 10px 0;
 }
 
@@ -82,6 +82,9 @@ p{
     display: flex;
     justify-content: center;
     margin: 30px;
+}
+.boton:hover {
+    transform: scale(1.1); 
 }
 
 .btn{
