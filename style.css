@@ -14,7 +14,7 @@ h1{
 }
 
 p{
-    color: rgb(63, 63, 63);
+    color: black;
     font-size: 22px;
     text-align: center;
 }
@@ -68,7 +68,7 @@ p{
 
 .mensaje{
     font-size: 30px;
-    color: dimgrey;
+    color: black;
     padding: 10px 0;
     margin: 50px;
     display: flex;
@@ -76,7 +76,7 @@ p{
 }
 
 .datos{
-    color: dimgray;
+    color: black;
     list-style: none;
     font-size: 20px;
     display: flex;

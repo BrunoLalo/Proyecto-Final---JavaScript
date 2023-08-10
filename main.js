@@ -16,14 +16,19 @@ function guardarResultado(resultado, condicion) {
     const datosJSON = JSON.stringify(resultadosIMC);
     localStorage.setItem('resultadoIMC', datosJSON);
 }
+
 function mostrarResultado() {
-    let datosPantalla = localStorage.getItem('resultadoIMC');
-    resultadosIMC.forEach(resultado => {
+    let datosPantalla = localStorage.getItem('resultadosIMC');
+    resultadosIMC.forEach(dato => {
+
+        const mensaje = document.createElement("p");
+        mensaje.classList.add('mensaje');
+
         const datosGuardados = document.createElement("ul");
         datosGuardados.classList.add('datos');
 
         main.innerHTML += "<p class='mensaje'>" + "Tu cálculo fue:" + "</p>";
-        main.innerHTML += "<li class='datos'>" + resultado.nombre + "; IMC: " + resultado.resultado + "; Condición: " + resultado.condicion +"."+ "</li>";
+        main.innerHTML += "<li class='datos'>" + dato.nombre + ":   IMC: " + dato.resultado + ";  condición: " + dato.condicion + "</li>";
     })
 }
 
@@ -33,7 +38,6 @@ calculo.addEventListener("click", () => {
     const altura = parseInt(alturaInput.value) / 100;
     const sexo = document.getElementById('sexo').value
     const res = peso / Math.pow(altura, 2);
-
 
     let resultado = "";
     switch (sexo) {
@@ -56,7 +60,7 @@ calculo.addEventListener("click", () => {
                 resultado = "peso inferior al normal.";
             }
             else if (res >= 21 && res < 25) {
-                resultado = "peso Normal.";
+                resultado = "peso normal.";
             }
             else if (res >= 25 && res < 30) {
                 resultado = "peso superior al normal.";
@@ -69,9 +73,6 @@ calculo.addEventListener("click", () => {
             resultado = "no se ha podido calcular.";
     }
 
-    const mensaje = document.createElement("p");
-    mensaje.classList.add('mensaje');
-
     Swal.fire({
         title: '¡Calculado!',
         text: "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado,
@@ -81,10 +82,19 @@ calculo.addEventListener("click", () => {
         iconHtml: '<i class="bi bi-calculator"></i>'
     })
 
-
     guardarResultado(res, resultado);
-    mostrarResultado();
+    setTimeout(() => {
+        mostrarResultado();
+    }, 2000);
+
+ 
+    fetch("./consejos.json")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+    })
 });
+
 
 const botonColorMode = document.querySelector("#color");
 const body = document.body;
