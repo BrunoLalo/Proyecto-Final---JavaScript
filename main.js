@@ -33,7 +33,6 @@ function mostrarResultado() {
     })
 }
 
-
 calculo.addEventListener("click", () => {
     const peso = parseInt(pesoInput.value);
     const altura = parseInt(alturaInput.value) / 100;
@@ -46,67 +45,80 @@ calculo.addEventListener("click", () => {
         case "m":
             if (res < 20) {
                 resultado = "peso inferior al normal.";
-                consejo = item.find(item => item.id === "inferior").consejos;
             }
             else if (res >= 20 && res < 24) {
                 resultado = "peso normal.";
-                consejo = item.find(item => item.id === "normal").consejos;
             }
             else if (res >= 24 && res < 29) {
                 resultado = "peso superior al normal.";
-                consejo = item.find(item => item.id === "superior").consejos;
             }
             else {
                 resultado = "obesidad.";
-                consejo = item.find(item => item.id === "obesidad").consejos;
             }
             break
         case "h":
             if (res < 21) {
                 resultado = "peso inferior al normal.";
-                consejo = item.find(item => item.id === "inferior").consejos;
             }
             else if (res >= 21 && res < 25) {
                 resultado = "peso normal.";
-                consejo = item.find(item => item.id === "normal").consejos;
             }
             else if (res >= 25 && res < 30) {
                 resultado = "peso superior al normal.";
-                consejo = item.find(item => item.id === "superior").consejos;
             }
             else {
                 resultado = "obesidad";
-                consejo = item.find(item => item.id === "obesidad").consejos;
             }
             break
         default:
             resultado = "no se ha podido calcular.";
-            consejo = "No se pudo calcular un consejo";
     }
 
-    Swal.fire({
-        title: '¡Calculado!',
-        text: "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado,
-        icon: 'question',
-        confirmButtonText: 'Aceptar',
-        iconColor: "dimgray",
-        iconHtml: '<i class="bi bi-calculator"></i>'
-    })
-
-    guardarResultado(res, resultado, consejo);
-    setTimeout(() => {
-        mostrarResultado();
-    }, 2000);
-
- 
     fetch("./consejos.json")
         .then(response => response.json())
-        .then(data =>{
-            console.log(data)
-            console.log(consejo)
+        .then(data => {
+            console.log(data);
+
+            switch (resultado) {
+                case "peso inferior al normal.":
+                    consejo = data.find(item => item.id === "inferior").consejos;
+                    break;
+                case "peso normal.":
+                    consejo = data.find(item => item.id === "normal").consejos;
+                    break;
+                case "peso superior al normal.":
+                    consejo = data.find(item => item.id === "superior").consejos;
+                    break;
+                case "obesidad.":
+                    consejo = data.find(item => item.id === "obesidad").consejos;
+                    break;
+                default:
+                    consejo = "No se pudo calcular un consejo";
+            }
+            Swal.fire({
+                title: '¡Calculado!',
+                text: "Tu IMC es de: " + res.toFixed(2) + ", y tu condición " + resultado,
+                icon: 'question',
+                confirmButtonText: 'Aceptar',
+                iconColor: "dimgray",
+                iconHtml: '<i class="bi bi-calculator"></i>'
+            })
+
+            guardarResultado(res, resultado, consejo);
+
+            console.log(consejo);
+
+            setTimeout(() => {
+                mostrarResultado();
+            }, 2000);
         })
-        
+
+        .catch(error => {
+            console.error("Error al obtener los datos:", error);
+        });
 });
+
+
 
 
 const botonColorMode = document.querySelector("#color");
