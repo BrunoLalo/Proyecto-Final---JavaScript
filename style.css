@@ -79,6 +79,7 @@ p{
     color: black;
     list-style: none;
     font-size: 20px;
+    margin: 20px;
     display: flex;
     justify-content: center;
 }
@@ -86,7 +87,7 @@ p{
 .boton{
     display: flex;
     justify-content: center;
-    margin: 30px;
+    margin: 20px;
 }
 .boton:hover {
     transform: scale(1.1); 

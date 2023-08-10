@@ -67,7 +67,7 @@ calculo.addEventListener("click", () => {
                 resultado = "peso superior al normal.";
             }
             else {
-                resultado = "obesidad";
+                resultado = "obesidad.";
             }
             break
         default:
@@ -77,20 +77,19 @@ calculo.addEventListener("click", () => {
     fetch("./consejos.json")
         .then(response => response.json())
         .then(data => {
-            console.log(data);
 
             switch (resultado) {
                 case "peso inferior al normal.":
-                    consejo = data.find(item => item.id === "inferior").consejos;
+                    consejo = data.find(item => item.id === "inferior").consejo;
                     break;
                 case "peso normal.":
-                    consejo = data.find(item => item.id === "normal").consejos;
+                    consejo = data.find(item => item.id === "normal").consejo;
                     break;
                 case "peso superior al normal.":
-                    consejo = data.find(item => item.id === "superior").consejos;
+                    consejo = data.find(item => item.id === "superior").consejo;
                     break;
                 case "obesidad.":
-                    consejo = data.find(item => item.id === "obesidad").consejos;
+                    consejo = data.find(item => item.id === "obesidad").consejo;
                     break;
                 default:
                     consejo = "No se pudo calcular un consejo";
@@ -105,12 +104,13 @@ calculo.addEventListener("click", () => {
             })
 
             guardarResultado(res, resultado, consejo);
+            mostrarResultado();
 
-            console.log(consejo);
-
+            
             setTimeout(() => {
-                mostrarResultado();
+                main.innerHTML += "<li class='datos'>" + consejo +"</li>";
             }, 2000);
+            
         })
 
         .catch(error => {
