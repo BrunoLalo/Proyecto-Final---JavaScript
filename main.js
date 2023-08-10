@@ -6,11 +6,12 @@ const nombre = document.querySelector('#nombre');
 
 const resultadosIMC = []
 
-function guardarResultado(resultado, condicion) {
+function guardarResultado(resultado, condicion, consejo) {
     const datos = {
         nombre: nombre.value,
         resultado: resultado.toFixed(2),
-        condicion: condicion
+        condicion: condicion,
+        consejo: consejo
     };
     resultadosIMC.push(datos)
     const datosJSON = JSON.stringify(resultadosIMC);
@@ -40,37 +41,47 @@ calculo.addEventListener("click", () => {
     const res = peso / Math.pow(altura, 2);
 
     let resultado = "";
+    let consejo = "";
     switch (sexo) {
         case "m":
             if (res < 20) {
                 resultado = "peso inferior al normal.";
+                consejo = item.find(item => item.id === "inferior").consejos;
             }
             else if (res >= 20 && res < 24) {
                 resultado = "peso normal.";
+                consejo = item.find(item => item.id === "normal").consejos;
             }
             else if (res >= 24 && res < 29) {
                 resultado = "peso superior al normal.";
+                consejo = item.find(item => item.id === "superior").consejos;
             }
             else {
                 resultado = "obesidad.";
+                consejo = item.find(item => item.id === "obesidad").consejos;
             }
             break
         case "h":
             if (res < 21) {
                 resultado = "peso inferior al normal.";
+                consejo = item.find(item => item.id === "inferior").consejos;
             }
             else if (res >= 21 && res < 25) {
                 resultado = "peso normal.";
+                consejo = item.find(item => item.id === "normal").consejos;
             }
             else if (res >= 25 && res < 30) {
                 resultado = "peso superior al normal.";
+                consejo = item.find(item => item.id === "superior").consejos;
             }
             else {
                 resultado = "obesidad";
+                consejo = item.find(item => item.id === "obesidad").consejos;
             }
             break
         default:
             resultado = "no se ha podido calcular.";
+            consejo = "No se pudo calcular un consejo";
     }
 
     Swal.fire({
@@ -82,7 +93,7 @@ calculo.addEventListener("click", () => {
         iconHtml: '<i class="bi bi-calculator"></i>'
     })
 
-    guardarResultado(res, resultado);
+    guardarResultado(res, resultado, consejo);
     setTimeout(() => {
         mostrarResultado();
     }, 2000);
@@ -90,9 +101,11 @@ calculo.addEventListener("click", () => {
  
     fetch("./consejos.json")
         .then(response => response.json())
-        .then(data => {
+        .then(data =>{
             console.log(data)
-    })
+            console.log(consejo)
+        })
+        
 });
 
 
